@@ -1,0 +1,134 @@
+
+#version: "3.9" #Version de los archivos de docker-compose
+version: "3"
+services: 
+
+  microserviciocrearcarpeta:
+    build: ./MICROSERVICIOCrearCarpeta                          #Ruta donde se ubica el Dockerfile y contenerizar
+    image: microserviciocrearcarpeta:latest                     #La imagen se crea con este nombre
+    ports: 
+      - "3200:3200"                                             #Puerto donde se expondra externa:interna
+    networks:
+      - proyecto1
+  
+  microservicioeditarcarpeta:
+    build: ./MICROSERVICIOEditarCarpeta                         #Ruta donde se ubica el Dockerfile y contenerizar
+    image: microservicioeditarcarpeta:latest                    #La imagen se crea con este nombre
+    ports: 
+      - "3300:3300"                                             #Puerto donde se expondra externa:interna
+    networks:
+      - proyecto1
+
+  microservicioeliminarcarpeta:
+    build: ./MICROSERVICIOEliminarCarpeta                       #Ruta donde se ubica el Dockerfile y contenerizar
+    image: microservicioeliminarcarpeta:latest                  #La imagen se crea con este nombre
+    ports: 
+      - "3100:3100"                                             #Puerto donde se expondra externa:interna
+    networks:
+      - proyecto1
+
+  microserviciolistarcarpetas:
+    build: ./MICROSERVICIOListarCarpetas                        #Ruta donde se ubica el Dockerfile y contenerizar
+    image: microserviciolistarcarpetas:latest
+    ports: 
+      - "3400:3400"                                             #Puerto donde se expondra externa:interna
+    networks:
+      - proyecto1
+  
+  serviciofiles: 
+    build: ./SERVICIOFiles                                      #Ruta donde se ubica el Dockerfile y contenerizar
+    image: serviciofiles:latest
+    ports: 
+      - "3500:3500"                                             #Puerto donde se expondra externa:interna
+    networks:
+      - proyecto1
+  
+  servicioreportes: 
+    build: ./SERVICIOReportes                                   #Ruta donde se ubica el Dockerfile y contenerizar
+    image: servicioreportes:latest
+    ports: 
+      - "3600:3600"                                             #Puerto donde se expondra externa:interna
+    networks:
+      - proyecto1
+
+  serviciousuario: 
+    build: ./SERVICIOUsuario                                    #Ruta donde se ubica el Dockerfile y contenerizar
+    image: serviciousuario:latest
+    ports: 
+      - "3700:3700"                                             #Puerto donde se expondra externa:interna
+    networks:
+      - proyecto1
+
+  selenium-hub:
+    image: selenium/hub:3.141.59-20210929
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+    extra_hosts:
+      - localhost:192.168.0.3
+
+  chrome:
+    image: selenium/node-chrome:3.141.59-20210929
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+      - NODE_MAX_INSTANCES=3
+      - NODE_MAX_SESSIONS=3
+
+  firefox:
+    image: selenium/node-firefox:3.141.59-20210929
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+      - NODE_MAX_INSTANCES=3
+      - NODE_MAX_SESSIONS=3
+  
+  middleware:
+    build: ./middleware                                         #Ruta donde se ubica el Dockerfile y contenerizar
+    image: middleware:latest
+    ports:
+      - "3000:3000"                                             #Puerto donde se expondra externa:interna
+    environment:
+      - API_MICROSERVICIOCREARCARPETA=http://microserviciocrearcarpeta:3200
+      - API_MICROSERVICIOEDITARCARPETA=http://microservicioeditarcarpeta:3300
+      - API_MICROSERVICIOELIMINARCARPETA=http://microservicioeliminarcarpeta:3100
+      - API_MICROSERVICIOLISTARCARPETAS=http://microserviciolistarcarpetas:3400
+      - API_SERVICIOFILES=http://serviciofiles:3500
+      - API_SERVICIOREPORTES=http://servicioreportes:3600
+      - API_SERVICIOUSUARIO=http://serviciousuario:3700
+    networks:
+      - proyecto1
+    #volumes: 
+    #  - /proc/:/elements/procs/
+    #depends_on:
+    #  - serviciofiles #Ssss
+  
+  frontend: 
+    build: ./FRONTEND                                             #Ruta donde se ubica el Dockerfile y contenerizar
+    image: frontend:latest
+    ports: 
+      - "80:80"                                                 #Puerto donde se expondra externa:interna
+    environment:
+      - API_MIDDLEWARE=http://middleware:3000
+    networks:
+      - proyecto1
+  
+  backend: 
+    build: ./BACKEND                                             #Ruta donde se ubica el Dockerfile y contenerizar
+    image: backend:latest
+    ports: 
+      - "2300:2300"                                                 #Puerto donde se expondra externa:interna
+    networks:
+      - proyecto1
+  
+networks:
+  proyecto1:                                                      #Nombre de la red a la que todos pertenecen
+    driver: bridge

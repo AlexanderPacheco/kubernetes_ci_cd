@@ -1,0 +1,23 @@
+{
+  "name": "selenium",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/run.js --reporter mochawesome --reporter-options autoOpen=true",
+    "test_selenium_grid": "mocha test/run_sgrid.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai-http": "^4.3.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^5.2.0",
+    "mochawesome": "^3.0.3",
+    "selenium-webdriver": "^4.0.0-alpha.1"
+  }
+}

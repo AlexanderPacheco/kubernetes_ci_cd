@@ -1,0 +1,165 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app.kubernetes.io/name: load-balancer-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: load-balancer-frontend
+  minReadySeconds: 10
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: load-balancer-frontend
+    spec:
+      containers:
+      - name: frontend
+        image: educr7/frontend
+        ports:
+        - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app.kubernetes.io/name: load-balancer-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: load-balancer-backend
+  minReadySeconds: 10
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: load-balancer-backend
+    spec:
+      containers:
+      - name: backend
+        image: educr7/backend
+        ports:
+        - containerPort: 2300
+
+
+# CODIGO ANTES DE LA CANTADA
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: services
+#   labels:
+#     app: services
+# spec:
+#   containers:
+#   - name: serviciousuario
+#     image: educr7/serviciousuario
+#     ports:
+#     - containerPort: 3700
+#   - name: serviciofiles
+#     image: educr7/serviciofiles
+#     ports:
+#     - containerPort: 3500
+
+# CAMBIO DETECTADO
+
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   labels:
+#     environment: test
+#   name: yajalapinchename
+# spec:
+#   selector:
+#     matchLabels:
+#       app: frontend
+#   replicas: 1 # indica al controlador que ejecute 2 pods
+#   template:
+#     metadata:
+#       labels:
+#         app: frontend
+#     spec:
+#       containers:
+#       - name: frontend
+#         image: educr7/frontend
+#         ports:
+#         - containerPort: 80
+
+
+
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   labels:
+#     environment: test
+#   name: yajalapinchename
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels: 
+#       environment: test
+#   minReadySeconds: 10
+#   strategy:
+#     rollingUpdate:
+#       maxSurge: 1
+#       maxUnavailable: 0
+#     type: RollingUpdate
+#   template:
+#     metadata:
+#       labels:
+#         environment: test
+#     spec:
+#       containers:
+#       - image: educr7/frontend #Las imagenes no deben contener ningun tipo de simbolo "_" o mayusculas, solo minusculas
+#         name: frontend
+#         ports:
+#           - containerPort: 80
+#             targetPort: 80
+#       #externalIPs: 
+#       #  - A.B.C.D
+        
+        
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   labels:
+#     environment: test
+#   name: testdeploy
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels: 
+#       environment: test
+#   minReadySeconds: 10
+#   strategy:
+#     rollingUpdate:
+#       maxSurge: 1
+#       maxUnavailable: 0
+#     type: RollingUpdate
+#   template:
+#     metadata:
+#       labels:
+#         environment: test
+#     spec:
+#       containers:
+#       - image: educr7/ayd2aydrive-frontend
+#         name: ayd2aydrive-frontend
+#         ports:
+#           - containerPort: 80
+
+# Comando para aplicar a kubernetes
+# kubectl apply -f deployment.yaml
+# https://kubernetes.io/docs/tutorials/stateless-application/expose-external-ip-address/
+# https://cloud.google.com/kubernetes-engine/docs/how-to/updating-apps

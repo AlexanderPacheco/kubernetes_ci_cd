@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: load-balancer-examplev2
+  labels:
+    app.kubernetes.io/name: load-balancer-examplev2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+        app.kubernetes.io/name: load-balancer-examplev2
+  template:
+    metadata:
+      labels:
+          app.kubernetes.io/name: load-balancer-examplev2
+    spec:
+      containers:
+      - image: dockerhubayd2usac2s2021/front1
+        name: frontbalancer1
+        ports:
+        - containerPort: 8091

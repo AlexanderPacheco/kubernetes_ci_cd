@@ -1,0 +1,94 @@
+
+#version: "3.9" #Version de los archivos de docker-compose
+version: "3"
+services: 
+
+  microserviciocrearcarpeta:
+    #build: ./MICROSERVICIOCrearCarpeta                          #Ruta donde se ubica el Dockerfile y contenerizar
+    image: educr7/microserviciocrearcarpeta
+    ports: 
+      - "3200:3200"                                             #Puerto donde se expondra externa:interna
+    networks:
+      - proyecto1
+  
+  microservicioeditarcarpeta:
+    #build: ./MICROSERVICIOEditarCarpeta                         #Ruta donde se ubica el Dockerfile y contenerizar
+    image: educr7/microservicioeditarcarpeta
+    ports: 
+      - "3300:3300"                                             #Puerto donde se expondra externa:interna
+    networks:
+      - proyecto1
+
+  microservicioeliminarcarpeta:
+    #build: ./MICROSERVICIOEliminarCarpeta                         #Ruta donde se ubica el Dockerfile y contenerizar
+    image: educr7/microservicioeliminarcarpeta
+    ports: 
+      - "3100:3100"                                             #Puerto donde se expondra externa:interna
+    networks:
+      - proyecto1
+
+  microserviciolistarcarpetas:
+    #build: ./MICROSERVICIOListarCarpetas                        #Ruta donde se ubica el Dockerfile y contenerizar
+    image: educr7/microserviciolistarcarpetas
+    ports: 
+      - "3400:3400"                                             #Puerto donde se expondra externa:interna
+    networks:
+      - proyecto1
+  
+  serviciofiles: 
+    #build: ./SERVICIOFiles                                      #Ruta donde se ubica el Dockerfile y contenerizar
+    image: educr7/serviciofiles
+    ports: 
+      - "3500:3500"                                             #Puerto donde se expondra externa:interna
+    networks:
+      - proyecto1
+  
+  servicioreportes: 
+    #build: ./SERVICIOReportes                                   #Ruta donde se ubica el Dockerfile y contenerizar
+    image: educr7/servicioreportes
+    ports: 
+      - "3600:3600"                                             #Puerto donde se expondra externa:interna
+    networks:
+      - proyecto1
+
+  serviciousuario: 
+    #build: ./SERVICIOUsuario                                    #Ruta donde se ubica el Dockerfile y contenerizar
+    image: educr7/serviciousuario
+    ports: 
+      - "3700:3700"                                             #Puerto donde se expondra externa:interna
+    networks:
+      - proyecto1
+
+  middleware:
+    #build: ./middleware                                         #Ruta donde se ubica el Dockerfile y contenerizar
+    image: educr7/middleware
+    ports:
+      - "3000:3000"                                             #Puerto donde se expondra externa:interna
+    environment:
+      - API_MICROSERVICIOCREARCARPETA=http://microserviciocrearcarpeta:3200
+      - API_MICROSERVICIOEDITARCARPETA=http://microservicioeditarcarpeta:3300
+      - API_MICROSERVICIOELIMINARCARPETA=http://microservicioeliminarcarpeta:3100
+      - API_MICROSERVICIOLISTARCARPETAS=http://microserviciolistarcarpetas:3400
+      - API_SERVICIOFILES=http://serviciofiles:3500
+      - API_SERVICIOREPORTES=http://servicioreportes:3600
+      - API_SERVICIOUSUARIO=http://serviciousuario:3700
+    networks:
+      - proyecto1
+    #volumes: 
+    #  - /proc/:/elements/procs/
+    #depends_on:
+    #  - serviciofiles #Ssss
+  
+  frontend: 
+    #build: ./FRONTEND                                             #Ruta donde se ubica el Dockerfile y contenerizar
+    image: educr7/frontend
+    ports: 
+      - "8080:80"                                                 #Puerto donde se expondra externa:interna
+    environment:
+      - API_MIDDLEWARE=http://middleware:3000
+    networks:
+      - proyecto1
+  
+networks:
+  proyecto1:                                                      #Nombre de la red a la que todos pertenecen
+    driver: bridge

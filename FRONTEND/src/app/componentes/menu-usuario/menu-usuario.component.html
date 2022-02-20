@@ -1,0 +1,128 @@
+<!--
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <div class="container">
+
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav ml-auto">
+
+      <button class="btn btn-secondary"  >Cerrar Sesion</button>
+
+    </ul>
+
+  </div>
+
+</div>
+</nav>
+-->
+
+<!--
+<nav class="navbar navbar-expand-sm navbar-light" style="background-color:cornflowerblue;">
+  <div class="container">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+
+        <a class="nav-link text-dark" style="font-size: 20px;" routerLink="/iniciosesion"   routerLinkActive="active">Gestor de Carpetas
+          <i class="bi bi-folder-fill" style="color:black;"></i>
+        </a>
+
+        <a class="nav-link text-dark" style="font-size: 20px;" routerLink="/iniciosesion"   routerLinkActive="active">Mi Perfil
+          <i class="bi bi-person-square" style="color:black;"></i>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+
+          <a class="nav-link text-dark" style="font-size: 20px;" routerLink="/iniciosesion"   routerLinkActive="active">Cerrar Sesion
+            <i class="bi bi-arrow-right-square-fill" style="color:black;"></i>
+          </a>
+
+
+        </li>
+      </ul>
+    </div>
+
+
+  </div>
+</nav>
+-->
+
+
+<nav class="navbar navbar-expand-sm navbar-light " style="background-color:cornflowerblue;">
+  <div class="container">
+    <!--<a class="navbar-brand" href="#">Gestor de Carpetas</a>-->
+
+    <button class="navbar-toggler" data-toggle="collapse"
+    data-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-dark" id="gestor_carpetas" style="font-size: 20px;" routerLink="/gestorcarpetas">
+            Gestor de Carpetas <i class="bi bi-folder-fill" style="color:black;"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" style="font-size: 20px;" routerLink="/perfilusuario">
+            Mi Perfil <i class="bi bi-person-square" style="color:black;"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" style="font-size: 20px;" routerLink="/reportelogs">
+            Reportes <i class="bi bi-table" style="color:black;"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" style="font-size: 20px;" routerLink="/autenticacion">
+            Autenticacion <i class="bi bi-shield-lock-fill" style="color:black;"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" style="font-size: 20px;" routerLink="/papelerausuario">
+            Papelera <i class="bi bi-trash" style="color:black;"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" style="font-size: 20px;" (click)="cerrar_sesion()">
+            Cerrar Sesion <i class="bi bi-arrow-right-square-fill" style="color:black;"></i>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-fluid bg-dark text-white text-center">
+  <div class="container">
+      <h4 >Gracias !!! , para nosotros es un placer gestionar tus documentos.</h4>
+      <p>Puede elegir la opcion que desea</p>
+  </div>
+</div>
+
+<!--
+<nav class="navbar navbar-expand-sm navbar-light bg-light ">
+  <div class="container">
+    <button class="navbar-toggler" data-toggle="collapse"
+    data-target="#mainNav">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="#">Gestor de Carpetas</a>
+        <a class="nav-item nav-link" href="#">Mi Perfil</a>
+      </div>
+    </div>
+
+  </div>
+</nav>
+-->

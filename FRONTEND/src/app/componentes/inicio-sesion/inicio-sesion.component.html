@@ -1,0 +1,95 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<div class="container " >
+
+     <div #alert style="text-align: center;" class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="this.Valid">
+        <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Usuario o contraseña erroneos.</strong>
+      </div>
+
+
+  <div class="col-md-4 mx-auto">
+
+    <div class="card">
+          <div class="card-header text-center">
+
+              <h4 style="color: darkgreen ;">BIENVENIDOS</h4>
+          </div>
+
+
+        <!-- <img src="/home/mario/Escritorio/usuario.jpg" class="img-fluid" alt="Responsive image"> -->
+        <img src="../../../assets/login.png" class="card-img-top" alt="Registro de usuario">
+
+          <div class="card-body">
+
+            <form >
+
+
+                  <div class="form-group">
+                      <input type="text"  id="nickname" name="nickname" [(ngModel)]="nickname" class="form-control" placeholder="Nickname" required autofocus>
+                  </div>
+                  <div class="form-group">
+                      <input type="password" id="contrasena"  name="contrasena" [(ngModel)]="contrasena" class="form-control" placeholder="Contraseña" required autofocus>
+                  </div>
+
+                  <button class="btn btn-success btn-block" id="btn_inicio_sesion" (click)="login()" >
+                    <!--data-toggle="modal" data-target="#ModalCodigo">-->
+                      Iniciar Sesion
+                  </button>
+
+                  <br>
+                  <p id="modal" style="text-align: center;" data-toggle="modal" data-target="#ModalCodigo">
+                    Haz click aqui para ingresar tu codigo</p>
+
+              </form>
+          </div>
+
+          <div class="card-footer">
+
+              <h6>No tienes usuario? , pudes registrarte sin ningun problema.</h6>
+              <br>
+
+              <button id="btn_redreg" class="btn btn-secondary btn-block" routerLink="/registrousuario">
+                  Registrarse
+              </button>
+
+          </div>
+
+
+      </div>
+  </div>
+</div>
+
+
+<!-- ESTE ES EL MODAL PARA INGRESAR EL CODIGO ENVIADO POR CORREO -->
+<div class="modal fade" id="ModalCodigo" tabindex="-1" role="dialog" aria-labelledby="ModalCodigo"
+aria-hidden="true" >
+<!--<div *ngIf="showModalBox" class="modal" id="ModalCodigo">-->
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="ModalCodigo">Autenticacion</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form action="">
+        <div class="form-group">
+          <a>Codigo de Autenticacion:</a>
+          <input [(ngModel)]="codigo.key" type="text"  name="codigo" class="form-control"
+           required autofocus>
+      </div>
+    </form>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary"
+        (click)="validarkey(codigo.key)">
+        Aceptar</button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+    </div>
+  </div>
+</div>
+</div>

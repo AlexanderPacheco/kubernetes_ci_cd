@@ -1,0 +1,181 @@
+
+
+<div class="container p-3" style="  height: 400px; overflow-y: scroll;">
+  <div class="card" >
+    <h4 class="card-header">
+      <button class="btn btn-primary text-align-center" style="font-size: 15px;"
+              routerLink="/gestorcarpetas">
+        <i class="bi bi-arrow-left-square-fill" style="color:black;"></i> Regresar</button>
+      <strong> PAPELERA DE RECICLAJE </strong>
+    </h4>
+
+
+    <div class="card-body " >
+
+
+      <!--//////////////////////////////////////////////////-->
+
+      <div class="container p-3">
+        <div class="row">
+          <div class="row justify-content-center">
+
+
+            <div class="card mx-3 my-4" style="width: 18rem;" *ngFor="let archivo of ListaArchivosEliminados">
+              <img src="../../../assets/google-docs.png" class="card-img-top text-align-center" style="width: 50px ; height: auto;" alt="...">
+
+              <h6 class="card-title"><strong>Nombre:</strong> {{archivo.nombre}}</h6>
+
+              <div class="card-footer">
+                <button type="submit"  class="btn btn-secondary" style="margin-left: 5px;"
+                        data-toggle="modal" data-target="#ModalArchivo"
+                        (click)="set_detallearchivo(archivo.link,archivo.extension,archivo.fechaSubida,archivo.nombre)">
+                  Detalle</button>
+
+
+              </div>
+
+            </div>
+
+            <!--////////////////////////////////////////////////// (click)="Mostrar(archivo.nombre)" -->
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<br>
+<br>
+
+
+
+<!-- ESTE EL MODAL PARA EL CRUD DE LOS ARCHIVOS -->
+<div class="modal fade" id="ModalArchivo" tabindex="-1" role="dialog" aria-labelledby="ModalArchivo" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalArchivo">Detalle Archivo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+          <div class="form-group">
+            <a>Nombre</a>
+            <input type="text"  name="nombre" class="form-control"
+                   [(ngModel)]="detalleArchivo.nombre" required autofocus>
+          </div>
+          <div class="form-group">
+            <a>Link de Acceso</a>
+            <input type="text" disabled="true" name="linkacceso" class="form-control"
+                   [(ngModel)]="detalleArchivo.link" required autofocus >
+          </div>
+          <div class="form-group">
+            <a>Fecha Creacion</a>
+            <input type="text" disabled="true"  name="fecha" class="form-control"
+                   [(ngModel)]="detalleArchivo.fechaSubida" required autofocus>
+          </div>
+          <div class="form-group">
+            <a>Extencion</a>
+            <input type="text" disabled="true" name="extencion" class="form-control"
+                   [(ngModel)]="detalleArchivo.extension" required autofocus>
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary"
+                (click)="restaurar(detalleArchivo.nombre,detalleArchivo.nombre)">Restaurar</button>
+        <button type="button" class="btn btn-danger"
+                (click)="eliminarDefinitivamente(detalleArchivo.nombre,detalleArchivo.nombre)">Eliminar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ESTE EL MODAL PARA MOVER ARCHIVOS
+<div class="modal fade" id="ModalMover" tabindex="-1" role="dialog" aria-labelledby="ModalMover" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalMover">Cambiar Ubicacion Archivo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+          <div class="form-group">
+            <a>Nombre</a>
+            <input type="text" disabled="true" name="nombre" class="form-control" [(ngModel)]="detalleArchivo.nombre" required
+                   autofocus>
+          </div>
+          <div class="form-group">
+            <a>Extencion</a>
+            <input type="text" disabled="true" name="extencion" class="form-control"
+                   [(ngModel)]="detalleArchivo.extension" required autofocus>
+          </div>
+          <div class="form-group">
+            <a>Ruta actual</a>
+            <input type="text" disabled="true" name="folder_before" class="form-control"
+                   [(ngModel)]="detalleArchivo.folder_before" required autofocus>
+          </div>
+          <div class="form-group">
+            <a>Ruta nueva</a>
+            <select class="form-control" name="folder_after" [(ngModel)]="detalleArchivo.folder_after">
+
+              <option value="/">/</option>
+              <option *ngFor="let folder of folders" [value]="folder">{{folder}}</option>
+
+            </select>
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary"
+                (click)="mover_archivo(detalleArchivo.nombre,detalleArchivo.extension,detalleArchivo.folder_before,detalleArchivo.folder_after)">Aceptar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+
+<!-- ESTE EL MODAL PARA VER O DESCARGAR DE ARCHIVOS
+<div   class="modal fade" id="ModalArchivoD" tabindex="-1" data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="ModalArchivoD" aria-hidden="true">
+  <div class="modal-dialog" role="document" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" name="ModalArchivoD"  id="ModalArchivoD">Acciones Archivo <strong>{{Archivo}}</strong></h5>
+      </div>
+      <div class="modal-body">
+        <section data-ng-controller="myCtrl" >
+          <div *ngIf="this.ver">
+            <br/>
+            <img style="width:100%;height:100%;" src="{{this.LinkImage}}"/>
+          </div>
+          <div class="video" style="width: 100%; height: 100%;" *ngIf="this.video">
+            <video controls #videoPlayer style="width: 100%; height: 100%;">
+              <source style="width: 100%; height: 100%;" src="{{this.LinkImage}}" type="video/mp4" />
+              Browser not supported
+            </video>
+          </div>
+        </section>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="Mostrar()">Ver</button>
+        <button type="button" class="btn btn-success" (click)="Descargar()">Descargar</button>
+        <button type="button" class="btn btn-danger" (click)="Eliminar()" data-dismiss="modal">Eliminar</button>
+        <button type="button" class="btn btn-secondary" (click)="Cerrar()" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+-->

@@ -1,0 +1,42 @@
+<div class="container " xmlns="http://www.w3.org/1999/html">
+  <div class="col-md-4 mx-auto">
+      <div class="card" >
+          <div class="card-header text-center">
+            <h3 style="color: indigo ;">Perfil de Usuario</h3>
+          </div>
+        <div class="card-header text-center">
+          <h3 style="color: indigo ;">{{usuario.nickname}}</h3>
+        </div>
+
+
+          <div class="card-body">
+              <form [formGroup]="FormPerfil" (ngSubmit)="cambios()">
+                  <div class="form-group">
+                      <input type="text"  name="in_correo" class="form-control" [value]="usuario.correo" formControlName="correo" required autofocus>
+                  </div>
+                  <div class="form-group">
+                      <input type="text"  name="in_fecha" class="form-control"  [value]="usuario.fechaNacimiento" formControlName="fechaNacimiento" required autofocus>
+                  </div>
+
+                  <div class="form-group">
+                      <input type="password"  name="in_contrasena" class="form-control" placeholder="Contraseña" formControlName="contrasena" required autofocus>
+                  </div>
+
+                  <div class="form-group">
+                    <input type="password"  name="in_confirmar" class="form-control" placeholder="Confirmar Contraseña" formControlName="confirmar" required autofocus>
+                  </div>
+
+                  <button class="btn btn-block text-white" style="background-color: indigo;" >
+                      Guardar Cambios
+                  </button>
+
+                  <button class="btn btn-secondary btn-block text-white" routerLink="/dashbordusuario" >
+                    Cancelar
+                </button>
+
+              </form>
+          </div>
+
+      </div>
+  </div>
+</div>

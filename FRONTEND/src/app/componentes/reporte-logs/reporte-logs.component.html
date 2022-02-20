@@ -1,0 +1,47 @@
+<div class="container p-3" >
+  <div class="card" >
+      <h5 class="card-header">
+        <button class="btn btn-primary text-align-center" style="font-size: 15px;"
+        routerLink="/dashbordusuario">
+        <i class="bi bi-arrow-left-square-fill" style="color:black;"></i> Regresar</button>
+        <strong> REPORTE DE LOGS Y ERRORES </strong>
+       </h5>
+
+      <div class="card-body"  >
+        <div class="container ">
+
+          <div class="container" style="  height: 400px; overflow-y: scroll;">
+          <table class="table"  >
+              <thead class="table-dark">
+                <tr>
+                  <th scope="col">Metodo</th>
+                  <th scope="col">Entrada</th>
+                  <th scope="col">Salida</th>
+                  <th scope="col">Error</th>
+                  <th scope="col">Fecha</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                  
+                <tr *ngFor="let logs of Reporte">
+                  <td> {{logs.metodoMiddleware}} </td>
+                  <td> {{logs.entrada}} </td>
+                  <td> {{logs.salida}} </td>
+                  <td> {{logs.esError}} </td>
+                  <td> {{logs.fechaHora}}</td>
+                </tr>
+              
+                
+              </tbody>
+            </table>
+          </div>
+          
+          
+          </div>
+
+          
+
+      </div>
+  </div>
+  </div>

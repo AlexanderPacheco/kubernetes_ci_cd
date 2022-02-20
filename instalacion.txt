@@ -1,0 +1,35 @@
+
+FUTURO MANUAL DE INSTALACION DE KUBERNETES
+
+Lo primero que hacemos es preparar el ambiente de deploy
+
+** Crear un cluster de kubernetes
+gcloud container clusters create kubilete --num-nodes=1 --tags=allin,allout --machine-type=n1-standard-2 --no-enable-network-policy --zone us-central1-a
+
+** Con este comando especificamos la cuenta de gcloud donde esta corriendo nuestro cluster de KUBERNETES
+gcloud init 
+
+** Este comando lo obtenemos en nuestra seccion de KUBERNETES engine, cuando buscamos la opcion conectar
+gcloud container clusters get-credentials gke-ci-cd --zone us-central1-a --project moonlit-helper-327614
+
+** Resultado esperado del comando anterior, "gke-ci-cd" es el nombre del cluster que cree
+Fetching cluster endpoint and auth data.
+kubeconfig entry generated for gke-ci-cd.
+
+
+Instalar Runner Gitlab
+curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash
+sudo apt-get install gitlab-runner
+sudo systemctl status gitlab-runner
+
+Crear y Registrar un nuevo Runner
+sudo gitlab-runner register
+(ver pagina de cicd en gitlab) https://gitlab.com/
+(ver pagina de cicd token) xtRf1eCFRAfjMHf9C365 
+(Descripción Sopes1-runner)
+(ejemplo: docker,sopes1)
+docker 
+alpine:latest
+sudo systemctl restart gitlab-runner
+
+

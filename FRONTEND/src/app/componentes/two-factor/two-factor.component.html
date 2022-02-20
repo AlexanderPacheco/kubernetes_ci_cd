@@ -1,0 +1,52 @@
+
+<div class="container p-3" >
+  <div class="card" >
+      <h5 class="card-header">
+        <button class="btn btn-primary text-align-center" style="font-size: 15px;"
+        routerLink="/dashbordusuario">
+        <i class="bi bi-arrow-left-square-fill" style="color:black;"></i> Regresar</button>
+        <strong> Autenticacion de dos factores </strong>
+       </h5>
+
+      <div class="card-body "    >
+        <div class="col-md-4 mx-auto">
+
+         <!--<div class="container" style="  height: 400px; overflow-y: scroll;">-->
+        
+            <form >
+                <div>
+                  <p>Ingrese los datos correspondintes del medio para recibir el token de verificacion, 
+                    por defecto se enviara al correo que registro.
+                  </p>
+                </div>
+
+              <div class="form-group">
+                  <input type="text"  id="telefono2fa" name="telefono_2fa" [(ngModel)]="datos.telefono" class="form-control" placeholder="Telefono" required autofocus>
+              </div>
+              <!--<div class="form-group">
+                  <input type="text" id="correo2fa"  name="correo_2fa" [(ngModel)]="datos.correo" class="form-control" placeholder="Correo" required autofocus>
+              </div>-->
+              
+              <button class="btn btn-success btn-block" (click)="activar()">
+                 Activar Autenticacion
+              </button>
+
+              <p>
+                ------------------------------------------------------
+                Si desea desactivar esta opcion no es necesario llenar los campos,
+                unicamente debera presionar el boton de desactivar.
+              </p>
+              <button class="btn btn-secondary btn-block" (click)="desactivar()">
+                Desactivar Autenticacion
+             </button>
+
+          </form>
+
+         <!-- </div> -->
+           
+          </div> 
+
+      </div>
+  </div>
+  </div>
+

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: servicios-service
+spec:
+  selector:
+      app: servicios
+  ports:
+    - protocol: TCP
+      port: 3700
+      targetPort: 3700

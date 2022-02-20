@@ -1,0 +1,50 @@
+
+<div class="container " >
+  <div class="col-md-4 mx-auto">
+      <div class="card" >
+          <div class="card-header text-center">
+            <h4 style="color: darkblue ;">Registro de Usuario</h4>
+          </div>
+
+
+
+          <img src="../../../assets/registrar.png" class="card-img-top" alt="Registro de usuario">
+
+          <div class="card-body">
+              <form (submit)="Regsitro()">
+                  <div class="form-group">
+                      <input id="inp_nick" type="text" [(ngModel)]="user.nickname" name="nickname" class="form-control" placeholder="Nickname" required autofocus>
+                  </div>
+                  <div class="form-group">
+                      <input id="inp_correo" type="text" [(ngModel)]="user.correo" name="email" class="form-control" placeholder="Correo" required autofocus>
+                  </div>
+                  <div class="form-group">
+                      <input id="inp_fnace" type="text" [(ngModel)]="user.fechaNacimiento" name="nacimiento" class="form-control" placeholder="DD-MM-YYYY" required autofocus>
+                  </div>
+
+                  <div class="form-group">
+                      <input id="inp_pass" type="password" [(ngModel)]="user.contrasena" name="contrasena" class="form-control" placeholder="Contraseña" required autofocus>
+                  </div>
+
+                  <div class="form-group">
+                    <input id="inp_confpass" type="password" [(ngModel)]="user.confcontrasena" name="confcontrasena" class="form-control" placeholder="Confirmar Contraseña" required autofocus>
+                  </div>
+
+                  <button id="btn_registro" class="btn btn-primary btn-block">
+                      Registrarse
+                  </button>
+
+
+              </form>
+          </div>
+
+          <div class="card-footer">
+            <button class="btn btn-secondary btn-block" routerLink="/iniciosesion">
+                Iniciar Sesion
+            </button>
+        </div>
+
+
+      </div>
+  </div>
+</div>
