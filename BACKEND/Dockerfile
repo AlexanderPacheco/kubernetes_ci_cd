@@ -14,8 +14,8 @@ RUN npm install
 #Aca pueden existir muchos mas comandos "run"
 
 #Seteando variables de entorno
-ENV AWS_ACCESS_KEY_ID="AKIAQWJQ6PWDMNFSPXHL"
-ENV AWS_SECRET_ACCESS_KEY="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"
+ENV AWS_ACCESS_KEY_ID="AWS_ACCESS_KEY_ID"
+ENV AWS_SECRET_ACCESS_KEY="AWS_SECRET_ACCESS_KEY"
 ENV AWS_DEFAULT_REGION="us-east-2"
 
 #Copiar todos los archivos al workdir
