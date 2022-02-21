@@ -4,8 +4,8 @@ require('dotenv').config();
 //
 const fs = require('fs');
 const { Console } = require('console');
-const ACCESS_KEY_ID = "AKIAWXVVL4U56Z7GZCXL";
-const SECRET_ACCESS_KEY = "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";
+const ACCESS_KEY_ID = "ACCESS_KEY_ID";
+const SECRET_ACCESS_KEY = "SECRET_ACCESS_KEY";
 const BUCKET_NAME = "ayd2-files";
 const REGION="us-east-2";
 
